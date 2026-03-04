@@ -36,6 +36,9 @@ WORKDIR /var/www/v2board
 # Copy project files
 COPY . /var/www/v2board
 
+# Remove .env if it leaked through (should be excluded by .dockerignore)
+RUN rm -f /var/www/v2board/.env
+
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader --no-interaction
 
