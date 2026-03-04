@@ -147,7 +147,7 @@ class ConfigController extends Controller
             'safe' => [
                 'email_verify' => (int)config('v2board.email_verify', 0),
                 'safe_mode_enable' => (int)config('v2board.safe_mode_enable', 0),
-                'secure_path' => config('v2board.secure_path', config('v2board.frontend_admin_path', hash('crc32b', config('app.key')))),
+                'secure_path' => config('v2board.secure_path', config('v2board.frontend_admin_path', 'admin')),
                 'email_whitelist_enable' => (int)config('v2board.email_whitelist_enable', 0),
                 'email_whitelist_suffix' => config('v2board.email_whitelist_suffix', Dict::EMAIL_WHITELIST_SUFFIX_DEFAULT),
                 'email_gmail_limit_enable' => config('v2board.email_gmail_limit_enable', 0),
@@ -190,11 +190,11 @@ class ConfigController extends Controller
         }
         $data = var_export($config, 1);
         if (!File::put(base_path() . '/config/v2board.php', "<?php\n return $data ;")) {
-            abort(500, '修改失败');
+            abort(500, 'Modification failed');
         }
         if (function_exists('opcache_reset')) {
             if (opcache_reset() === false) {
-                abort(500, '缓存清除失败，请卸载或检查opcache配置状态');
+                abort(500, 'Cache clearing failed, please uninstall or check opcache configuration status');
             }
         }
         Artisan::call('config:cache');

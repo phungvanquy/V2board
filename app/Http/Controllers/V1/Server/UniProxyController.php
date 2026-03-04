@@ -36,7 +36,7 @@ class UniProxyController extends Controller
         if (!$this->nodeInfo) abort(500, 'server is not exist');
     }
 
-    // 后端获取用户
+    // Backend get users
     public function user(Request $request)
     {
         ini_set('memory_limit', -1);
@@ -54,7 +54,7 @@ class UniProxyController extends Controller
         return response($response)->header('ETag', "\"{$eTag}\"");
     }
 
-    // 后端提交数据
+    // Backend submit data
     public function push(Request $request)
     {
         $data = request()->getContent() ?: json_encode($_POST);
@@ -75,7 +75,7 @@ class UniProxyController extends Controller
         ]);
     }
 
-    // 后端获取在线数据
+    // Backend get online data
     public function alivelist(Request $request)
     {
         $userService = new UserService();
@@ -101,7 +101,7 @@ class UniProxyController extends Controller
         return response()->json(['alive' => (object)$alive]);
     }
 
-    // 后端提交在线数据
+    // Backend submit online data
     public function alive(Request $request)
     {
         $data = request()->getContent() ?: json_encode($_POST);
@@ -115,9 +115,9 @@ class UniProxyController extends Controller
         $updateAt = time();
         foreach ($data as $uid => $ips) {
             $ips_array = Cache::get('ALIVE_IP_USER_'. $uid) ?? [];
-            // 更新节点数据
+            // Update node data
             $ips_array[$this->nodeType . $this->nodeId] = ['aliveips' => $ips, 'lastupdateAt' => $updateAt];
-            // 清理过期数据
+            // Clean expired data
             foreach($ips_array as $nodetypeid => $oldips) { 
                 if (!is_int($oldips) && ($updateAt - $oldips['lastupdateAt'] > 100)) { 
                     unset($ips_array[$nodetypeid]); 
@@ -151,7 +151,7 @@ class UniProxyController extends Controller
         ]);
     }
 
-    // 后端获取配置
+    // Backend get config
     public function config(Request $request)
     {
         switch ($this->nodeType) {
@@ -209,7 +209,7 @@ class UniProxyController extends Controller
                 if ($this->nodeInfo->version == 1) {
                    $response['obfs'] = $this->nodeInfo->obfs_password ?? null;
                 } elseif ($this->nodeInfo->version == 2) {
-                   //TODO 处理hy2客户端上下行宽带设置
+                   //TODO Handle hy2 client bandwidth settings
                    $response['ignore_client_bandwidth'] = true;
                    $response['obfs'] = $this->nodeInfo->obfs ?? null;
                    $response['obfs-password'] = $this->nodeInfo->obfs_password ?? null;

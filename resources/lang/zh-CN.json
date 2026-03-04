@@ -96,5 +96,17 @@
     "Sending frequently, please try again later": "发送频繁，请稍后再试",
     "Current product is sold out": "当前商品已售罄",
     "There are too many password errors, please try again after :minute minutes.": "密码错误次数过多，请 :minute 分钟后再试",
-    "Reset failed, Please try again later": "重置失败，请稍后再试"
+    "Reset failed, Please try again later": "重置失败，请稍后再试",
+    "Giftcard cannot be empty": "礼品卡不能为空",
+    "Not suitable gift card type": "不适用的礼品卡类型",
+    "Plan period cannot be empty": "套餐周期不能为空",
+    "The gift card does not exist": "礼品卡不存在",
+    "The gift card has already been used by this user": "该礼品卡已被此用户使用",
+    "The gift card has expired": "礼品卡已过期",
+    "The gift card is not yet valid": "礼品卡还未到可用时间",
+    "The gift card usage limit has been reached": "礼品卡已达到使用次数上限",
+    "This payment period cannot be purchased, please choose another period": "该订阅周期无法进行购买，请选择其它周期",
+    "Too many requests, please try again later.": "请求过于频繁，请稍后再试",
+    "Unknown gift card type": "未知的礼品卡类型",
+    "Wrong plan period": "套餐周期参数有误"
 }

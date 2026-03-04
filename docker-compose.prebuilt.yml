@@ -1,0 +1,62 @@
+services:
+  v2board:
+    image: v2board-v2board:latest
+    container_name: v2board-app
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - ./.env:/var/www/v2board/.env
+      - ./config/v2board.php:/var/www/v2board/config/v2board.php
+      - ./public/assets/admin:/var/www/v2board/public/assets/admin
+      - ./public/favicon.ico:/var/www/v2board/public/favicon.ico
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - v2board-network
+
+  mysql:
+    image: mysql:5.7
+    container_name: v2board-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: v2board_root_pass
+      MYSQL_DATABASE: v2board
+      MYSQL_USER: v2board
+      MYSQL_PASSWORD: v2board_db_pass
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./backup:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-pv2board_root_pass"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - v2board-network
+
+  redis:
+    image: redis:7-alpine
+    container_name: v2board-redis
+    restart: unless-stopped
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - v2board-network
+
+volumes:
+  mysql-data:
+  redis-data:
+
+networks:
+  v2board-network:
+    driver: bridge
+

@@ -73,7 +73,7 @@ class AlipayF2F {
     {
         $response = Http::get('https://openapi.alipay.com/gateway.do', $this->buildParam())->json();
         $resKey = str_replace('.', '_', $this->method) . '_response';
-        if (!isset($response[$resKey])) throw new \Exception('从支付宝请求失败');
+        if (!isset($response[$resKey])) throw new \Exception('Alipay request failed');
         $response = $response[$resKey];
         if ($response['msg'] !== 'Success') throw new \Exception($response['sub_msg']);
         $this->response = $response;
@@ -82,7 +82,7 @@ class AlipayF2F {
     public function getQrCodeUrl()
     {
         $response = $this->response;
-        if (!isset($response['qr_code'])) throw new \Exception('获取付款二维码失败');
+        if (!isset($response['qr_code'])) throw new \Exception('Failed to get payment QR code');
         return $response['qr_code'];
     }
 
@@ -112,7 +112,7 @@ class AlipayF2F {
     public function buildQuery($query)
     {
         if (!$query) {
-            throw new \Exception('参数构造错误');
+            throw new \Exception('Parameter construction error');
         }
         //将要 参数 排序
         ksort($query);

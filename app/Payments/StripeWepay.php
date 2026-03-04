@@ -18,7 +18,7 @@ class StripeWepay {
     {
         return [
             'currency' => [
-                'label' => '货币单位',
+                'label' => 'Currency',
                 'description' => '',
                 'type' => 'input',
             ],
@@ -28,7 +28,7 @@ class StripeWepay {
                 'type' => 'input',
             ],
             'stripe_webhook_key' => [
-                'label' => 'WebHook密钥签名',
+                'label' => 'WebHook Secret Key',
                 'description' => '',
                 'type' => 'input',
             ]

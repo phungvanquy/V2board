@@ -53,7 +53,7 @@ class TrafficFetchJob implements ShouldQueue
                     $user->u = $user->u + ($this->data[$userId][0] * $this->server['rate']);
                     $user->d = $user->d + ($this->data[$userId][1] * $this->server['rate']);
                     if (!$user->save()) {
-                        info("流量更新失败\n未记录用户ID:{$userId}\n未记录上行:{$user->u}\n未记录下行:{$user->d}");
+                        info("Traffic update failed\nUnrecorded user ID:{$userId}\nUnrecorded upload:{$user->u}\nUnrecorded download:{$user->d}");
                     }
                 }
                 DB::commit();
@@ -67,7 +67,7 @@ class TrafficFetchJob implements ShouldQueue
                         continue;
                     }
                 }
-                abort(500, '用户流量更新失败'. $e->getMessage());
+                abort(500, 'User traffic update failed '. $e->getMessage());
             }
         }
     }

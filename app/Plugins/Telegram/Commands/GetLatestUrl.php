@@ -7,12 +7,12 @@ use App\Plugins\Telegram\Telegram;
 
 class GetLatestUrl extends Telegram {
     public $command = '/getlatesturl';
-    public $description = '将Telegram账号绑定到网站';
+    public $description = 'Get latest website URL';
 
     public function handle($message, $match = []) {
         $telegramService = $this->telegramService;
         $text = sprintf(
-            "%s的最新网址是：%s",
+            "The latest URL for %s is: %s",
             config('v2board.app_name', 'V2Board'),
             config('v2board.app_url')
         );

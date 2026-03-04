@@ -1,17 +1,17 @@
 window.settings = {
-  // 站点标题
+  // Site title
   title: 'V2Board',
   // API
   host: 'https://v2board.phungvanquy.com',
-  // 主题
+  // Theme
   theme: {
     sidebar: 'light',
     header: 'dark',
     color: 'default'
   },
-  // 背景
+  // Background
   background_url: '',
   logo: '',
-  // 需与V2Board设置中的后台路径一致
-  secure_path: 'admincontrol'
+  // Must match the admin path set in V2Board settings
+  secure_path: 'admin'
 }

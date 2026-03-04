@@ -41,17 +41,17 @@ class GiftcardController extends Controller
                 $params['code'] = Helper::randomChar(16);
             }
             if (!Giftcard::create($params)) {
-                abort(500, '礼品卡创建失败');
+                abort(500, 'Giftcard creation failed');
             }
         } else {
             $giftcard = Giftcard::find($request->input('id'));
             if (!$giftcard) {
-                abort(404, '礼品卡不存在');
+                abort(404, 'Giftcard does not exist');
             }
             try {
                 $giftcard->update($params);
             } catch (\Exception $e) {
-                abort(500, '礼品卡保存失败');
+                abort(500, 'Giftcard save failed');
             }
         }
 
@@ -76,7 +76,7 @@ class GiftcardController extends Controller
         DB::beginTransaction();
         try {
             if (!Giftcard::insert($giftcards)) {
-                throw new \Exception('礼品卡批量生成失败');
+                throw new \Exception('Giftcard batch generation failed');
             }
             DB::commit();
         } catch (\Exception $e) {
@@ -84,13 +84,13 @@ class GiftcardController extends Controller
             abort(500, $e->getMessage());
         }
 
-        $data = "名称,类型,数值,开始时间,结束时间,可用次数,礼品卡卡密,生成时间\r\n";
+        $data = "Name,Type,Value,Start Time,End Time,Usage Limit,Giftcard Code,Created At\r\n";
         foreach ($giftcards as $giftcard) {
-            $type = ['', '金额', '时长', '流量', '重置', '套餐'][$giftcard['type']];
-            $value = ['', round($giftcard['value']/100, 2), $giftcard['value'] . '天', $giftcard['value'] . 'GB', '-', $giftcard['value'] . '天'][$giftcard['type']];
+            $type = ['', 'Amount', 'Duration', 'Traffic', 'Reset', 'Plan'][$giftcard['type']];
+            $value = ['', round($giftcard['value']/100, 2), $giftcard['value'] . ' days', $giftcard['value'] . 'GB', '-', $giftcard['value'] . ' days'][$giftcard['type']];
             $startTime = date('Y-m-d H:i:s', $giftcard['started_at']);
             $endTime = date('Y-m-d H:i:s', $giftcard['ended_at']);
-            $limitUse = $giftcard['limit_use'] ?? '不限制';
+            $limitUse = $giftcard['limit_use'] ?? 'Unlimited';
             $createTime = date('Y-m-d H:i:s', $giftcard['created_at']);
             $data .= "{$giftcard['name']},{$type},{$value},{$startTime},{$endTime},{$limitUse},{$giftcard['code']},{$createTime}\r\n";
         }
@@ -103,16 +103,16 @@ class GiftcardController extends Controller
     {
         $giftcardId = $request->input('id');
         if (empty($giftcardId)) {
-            abort(400, '未找到礼品卡');
+            abort(400, 'Giftcard not found');
         }
 
         $giftcard = Giftcard::find($giftcardId);
         if (!$giftcard) {
-            abort(404, '礼品卡不存在');
+            abort(404, 'Giftcard does not exist');
         }
 
         if (!$giftcard->delete()) {
-            abort(500, '删除失败');
+            abort(500, 'Delete failed');
         }
 
         return response([

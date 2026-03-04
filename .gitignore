@@ -19,5 +19,6 @@ composer.phar
 composer.lock
 yarn.lock
 docker-compose.yml
+backup/
 .DS_Store
 public/clients/*

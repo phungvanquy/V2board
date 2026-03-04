@@ -96,5 +96,17 @@
     "Sending frequently, please try again later": "Sending frequently, please try again later",
     "Current product is sold out": "Current product is sold out",
     "There are too many password errors, please try again after :minute minutes.": "There are too many password errors, please try again after :minute minutes.",
-    "Reset failed, Please try again later": "Reset failed, Please try again later"
+    "Reset failed, Please try again later": "Reset failed, Please try again later",
+    "Giftcard cannot be empty": "Giftcard cannot be empty",
+    "Not suitable gift card type": "Not suitable gift card type",
+    "Plan period cannot be empty": "Plan period cannot be empty",
+    "The gift card does not exist": "The gift card does not exist",
+    "The gift card has already been used by this user": "The gift card has already been used by this user",
+    "The gift card has expired": "The gift card has expired",
+    "The gift card is not yet valid": "The gift card is not yet valid",
+    "The gift card usage limit has been reached": "The gift card usage limit has been reached",
+    "This payment period cannot be purchased, please choose another period": "This payment period cannot be purchased, please choose another period",
+    "Too many requests, please try again later.": "Too many requests, please try again later.",
+    "Unknown gift card type": "Unknown gift card type",
+    "Wrong plan period": "Wrong plan period"
 }
