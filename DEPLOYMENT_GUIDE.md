@@ -110,7 +110,7 @@ Mở `http://your-server-ip/admin` và đăng nhập bằng tài khoản admin v
 
 ### 6. (Tùy chọn) Xuất image để dùng prebuilt mode
 
-Sau khi build xong, image đã được tag là `v2board:latest`. Có thể chuyển sang prebuilt mode:
+Sau khi build xong, image đã được tag là `phungvanquy/v2board:v1.0`. Có thể chuyển sang prebuilt mode:
 
 ```bash
 docker compose down
@@ -129,7 +129,7 @@ Sau khi build xong ở Option A, xuất image ra file:
 
 ```bash
 # Xuất image v2board
-docker save v2board:latest | gzip > v2board-image.tar.gz
+docker save phungvanquy/v2board:v1.0 | gzip > v2board-image.tar.gz
 
 # Chuẩn bị thư mục deploy
 mkdir -p v2board-deploy/backup v2board-deploy/config v2board-deploy/public/assets

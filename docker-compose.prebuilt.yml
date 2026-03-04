@@ -1,6 +1,6 @@
 services:
   v2board:
-    image: phungvanquy/v2board:latest
+    image: phungvanquy/v2board:v1.0
     container_name: v2board-app
     restart: unless-stopped
     ports:
@@ -24,15 +24,15 @@ services:
     container_name: v2board-mysql
     restart: unless-stopped
     environment:
-      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-v2board_root_pass}
-      MYSQL_DATABASE: ${DB_DATABASE:-v2board}
-      MYSQL_USER: ${DB_USERNAME:-v2board}
-      MYSQL_PASSWORD: ${DB_PASSWORD:-v2board_db_pass}
+      MYSQL_ROOT_PASSWORD: v2board_root_pass
+      MYSQL_DATABASE: v2board
+      MYSQL_USER: v2board
+      MYSQL_PASSWORD: v2board_db_pass
     volumes:
       - mysql-data:/var/lib/mysql
       - ./backup:/docker-entrypoint-initdb.d
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${DB_ROOT_PASSWORD:-v2board_root_pass}"]
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-pv2board_root_pass"]
       interval: 10s
       timeout: 5s
       retries: 5
