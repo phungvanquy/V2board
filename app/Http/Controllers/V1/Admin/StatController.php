@@ -25,6 +25,14 @@ use function PHPSTORM_META\map;
 
 class StatController extends Controller
 {
+    public function getStat(Request $request)
+    {
+        $statisticalService = new StatisticalService();
+        return [
+            'data' => $statisticalService->generateStatData()
+        ];
+    }
+
     public function getOverride(Request $request)
     {
         return [

@@ -2,7 +2,7 @@ window.settings = {
   // Site title
   title: 'V2Board',
   // API
-  host: 'https://v2board.phungvanquy.com',
+  host: '',
   // Theme
   theme: {
     sidebar: 'light',
